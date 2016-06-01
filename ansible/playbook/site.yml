@@ -1,0 +1,13 @@
+---
+- name: Handson環境をインストール
+  # - include: webservers.yml
+  hosts: handson
+  remote_user: vagrant
+  become: yes
+  vars_files:
+    - ../host_vars/development.yml
+  roles:
+    - ../roles/common
+    - ../roles/httpd
+    - ../roles/php
+    - ../roles/mysql

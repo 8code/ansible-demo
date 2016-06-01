@@ -1,0 +1,29 @@
+---
+user:
+  name: vagrant
+  group: vagrant
+  password: vagrant
+
+project: handson
+hostname: handson.local
+project_root: "/home/{{ user['name'] }}"
+document_root: "{{ project_root }}/dist/www/html"
+log_root: /var/log
+charset: utf8
+
+static:
+  hostname: cording.handson.local
+  document_root: "{{ project_root }}/dist/www/html/cording"
+  charset: utf8
+
+httpd:
+  error_log: "{{ log_root }}/httpd/error_log"
+  access_log: "{{ log_root }}/httpd/access_log combined"
+
+wp:
+  sitename: handson
+  admin: dev
+  password: ^lS$9z)Y!uM&j0^Fa1qOl8iT
+  email: 'example@cinra.net'
+  theme: bootstrap
+  table_prefix: wp

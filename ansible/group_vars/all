@@ -1,0 +1,30 @@
+---
+project: handson
+
+user:
+  name: cinra
+  password: pass
+  password_hashed: $1J0dFWU3JXy.
+  group: www
+
+php:
+  max_file_size: 40M
+
+httpd:
+  basic_auth: no
+
+static:
+  basic_auth: no
+
+wp:
+  sitename: wordpress package by cinra
+  admin: dev
+  password: ^lS$9z)Y!uM&j0^Fa1qOl8iT
+  email: "example@cinra.net"
+  theme: bootstrap
+  table_prefix: wp
+
+mysql:
+  dbname: handson
+  host: localhost
+  root_password: 51N-mDJARfn9-6lu

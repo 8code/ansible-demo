@@ -1,0 +1,7 @@
+path: {{ document_root }}
+url: http://{{ hostname }}
+user: {{ user['name'] }}
+
+core config:
+  dbuser: {{ user['name'] }}
+  dbpass: {{ user['password'] }}
