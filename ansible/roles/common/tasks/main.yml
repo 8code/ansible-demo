@@ -2,10 +2,10 @@
   hostname: name={{ hostname }}
   tags: common
 
-- name: グループを追加
-  group: name={{ user['group'] }}
-  tags: common
+#- name: グループを追加
+#  group: name={{ user['group'] }}
+#  tags: common
 
-- name: ユーザーを追加
-  user: name={{ user['name'] }} group={{ user['group'] }}
-  tags: common
+#- name: ユーザーを追加
+#  user: name={{ user['name'] }} group={{ user['group'] }}
+#  tags: common

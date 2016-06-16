@@ -1,0 +1,82 @@
+###
+### nginx.conf -- main nginx configuration file
+###
+### This configuration is managed by Ansible! Local changes will most likely be clobbered.
+### To change settings, add a new conffile in conf.d.
+###   {{ ansible_managed }}
+###
+
+{% if nginx.group %}
+user {{ nginx.user }} {{ nginx.group }};
+{% else %}
+user {{ nginx.user }};
+{% endif %}
+
+worker_processes  auto;
+
+error_log  {{ nginx.log_d }}/error.log;
+{% if nginx.enable_debug %}
+error_log  {{ nginx.log_d }}/debug.log debug;
+{% endif %}
+
+events {
+    worker_connections  {{ nginx.worker_conns }};
+    multi_accept on;
+}
+
+http {
+    ##
+    # DEFAULT TYPES
+    ##
+
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    ##
+    # LOGGING OPTIONS
+    ##
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    log_format  grokable '$http_host '
+                '$remote_addr [$time_local] '
+                '"$request" $status $body_bytes_sent '
+                '"$http_referer" "$http_user_agent" '
+                '$request_time '
+                '$upstream_response_time';
+
+    access_log  {{ nginx.log_d }}/access.log  grokable;
+
+    ##
+    # CONNECTION SETTINGS
+    ##
+
+    sendfile        on;
+    tcp_nopush      on;
+    tcp_nodelay     on;
+
+    keepalive_timeout  {{ nginx.global_keepalive_timeout }};
+
+    ##
+    # GZIP SETTINGS
+    ##
+
+    gzip  {{ nginx.gzip_compression }};
+    gzip_disable "msie6";
+
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    ##
+    # INCLUDES
+    ##
+
+    include {{ nginx.conf_d }}/*.conf;
+    include {{ nginx.sites_d }}/*.conf;
+}
