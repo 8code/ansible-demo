@@ -3,11 +3,11 @@
 - name: Install nginx
   yum: name=nginx state=latest
 
-- name: set auto start nginx
+- name: Set auto start nginx
   #command: chkconfig nginx on
   command: systemctl enable nginx
 
-- name: restart nginx
+- name: Restart nginx
   #command: service nginx restart
   command: systemctl restart nginx
 
