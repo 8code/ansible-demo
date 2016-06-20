@@ -4,8 +4,8 @@ server {
     server_name  {{ nginx.server_name }};
     root  {{ document_root }};
 
-    access_log  {{ nginx.access_log }}  main;
-    error_log  {{ nginx.error_log }};
+    access_log  {{ nginx['access_log'] }}  main;
+    error_log  {{ nginx['error_log'] }};
 
     disable_symlinks off;
     location / {

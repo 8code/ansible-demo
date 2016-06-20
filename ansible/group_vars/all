@@ -23,8 +23,3 @@ wp:
   email: "example@cinra.net"
   theme: bootstrap
   table_prefix: wp
-
-mysql:
-  dbname: handson
-  host: localhost
-  root_password: 51N-mDJARfn9-6lu

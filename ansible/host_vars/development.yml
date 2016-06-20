@@ -6,7 +6,7 @@ user:
 
 project: handson
 hostname: handson.local
-project_root: "/home/{{ user.name }}"
+project_root: "/home/{{ user['name'] }}"
 document_root: "{{ project_root }}/www/html"
 log_root: /var/log
 charset: utf8
@@ -32,3 +32,8 @@ wp:
   email: 'example@cinra.net'
   theme: bootstrap
   table_prefix: wp
+
+mysql:
+  dbname: handson
+  host: localhost
+  root_password: vagrant

@@ -7,16 +7,17 @@
   #command: chkconfig nginx on
   command: systemctl enable nginx
 
+- name: nginx - 環境設定（vhost）
+  template: src={{ nginx['template_default'] }} dest={{ nginx['vhost_path'] }}/{{ nginx['default_file'] }}
+
+- name: nginx - 環境設定（PHP-FPM 連携用vhost）
+  template: src={{ nginx['template_vhost'] }} dest={{ nginx['vhost_path'] }}/{{ nginx['vhost_file'] }}
+
 - name: nginx - 設定をリロード
   #command: service nginx restart
   #command: systemctl restart nginx
   command: systemctl reload nginx
 
-- name: nginx - 環境設定（vhost）
-  template: src={{ nginx.template_default }} dest={{ nginx.vhost_path }}/{{ nginx.default_file }}
-
-- name: nginx - 環境設定（PHP-FPM 連携用vhost）
-  template: src={{ nginx.template_vhost }} dest={{ nginx.vhost_path }}/{{ nginx.vhost_file }}
 
 #- name: Set nginx.conf
 #  template: src={{ nginx['template'] }} dest=/etc/nginx/nginx.conf
