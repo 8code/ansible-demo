@@ -8,8 +8,8 @@
     - ../host_vars/development.yml
   roles:
     #- ../roles/common
+    #- ../roles/httpd
     - ../roles/nginx
     - ../roles/php
-    # - ../roles/httpd
-
-    # - ../roles/mysql
+    - ../roles/mysql
+    - ../roles/wp

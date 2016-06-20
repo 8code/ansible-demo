@@ -2,6 +2,11 @@
   hostname: name={{ hostname }}
   tags: common
 
+- name: SELinux 無効化
+  command: setenforce 0
+  command: getenforce
+
+
 #- name: グループを追加
 #  group: name={{ user['group'] }}
 #  tags: common

@@ -73,3 +73,22 @@ ls
 yum install net-tools
 sudo su
 exit
+ls
+cd ansible/
+ansible-playbook playbook/site.yml
+yum list installed | grep php
+php --version
+ansible-playbook playbook/site.yml
+ls
+cd ../
+ls
+cd ../
+ls
+cd vagrant/
+ls
+touch index.php
+vi index.php 
+mv index.php www/html/
+ls
+ls www/html/
+exit

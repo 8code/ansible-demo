@@ -18,17 +18,17 @@ static:
 nginx:
   server_name: 192.168.33.50
   vhost_path: /etc/nginx/conf.d
-  vhost_file: default.conf
-  template: default.conf.j2
+  default_file: default.conf
+  vhost_file: wordpress.conf
+  template_default: default.conf.j2
+  template_vhost: fpm.conf.j2
+  error_log: "{{ log_root }}/nginx/error_log"
+  access_log: "{{ log_root }}/nginx/access_log combined"
 
-#httpd:
-#  error_log: "{{ log_root }}/httpd/error_log"
-#  access_log: "{{ log_root }}/httpd/access_log combined"
-
-#wp:
-#  sitename: handson
-#  admin: dev
-#  password: ^lS$9z)Y!uM&j0^Fa1qOl8iT
-#  email: 'example@cinra.net'
-#  theme: bootstrap
-#  table_prefix: wp
+wp:
+  sitename: handson
+  admin: dev
+  password: ^lS$9z)Y!uM&j0^Fa1qOl8iT
+  email: 'example@cinra.net'
+  theme: bootstrap
+  table_prefix: wp

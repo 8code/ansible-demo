@@ -1,0 +1,36 @@
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  {{ nginx.server_name }};
+    root  {{ document_root }};
+
+    access_log  {{ nginx.access_log }}  main;
+    error_log  {{ nginx.error_log }};
+
+    disable_symlinks off;
+    location / {
+        index  index.php index.html index.htm;
+    }
+
+    # Settings for WordPress access.
+    if (-f $request_filename) {
+        break;
+    }
+    if (!-e $request_filename) {
+        rewrite ^.+?(/wp-.*) $1 last;
+        rewrite ^.+?(/.*\.php)$ $1 last;
+        rewrite ^ index.php last;
+    }
+
+    # Settings for PHP FPM.
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root/$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny  all;
+    }
+}
