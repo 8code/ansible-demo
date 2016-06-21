@@ -4,35 +4,29 @@
 ## index
 
 ### 1. Vagrantを実行
-### 2. Ansible実行の前に
-### 3. ゲスト環境にAnsibleをインストール
-### 4. 一旦、プレイブックを実行
-### 5. rolesの中身とモジュールの呼び出し
-### 6. Wordpressインストール
+### 2. Ansible解説＆LAMP環境を構築
+### 3. Ansibleを実行
+### 4. Wordpressインストール
 
 ---
 
 ## 1. Vagrantで環境を作成
 1-1. `vagrant up`  
+1-2. `vagrant ssh`  
+1-3. `yum install ansible`
 
-## 2. Ansible実行の前に
-2-1. 各種ディレクトリと役割  
-2-2. 全体の構成
+## 2. Ansible解説＆LAMP環境を構築
+2-1. ディレクトリ構成、各種設定ファイルの解説  
+2-2. host_vars設定
+2-3. LAMP環境構築用のタスクを作成  
+2-4. nginx  
+2-5. mysql  
+2-6. PHP-FPM
 
-## 3. ゲスト環境にAnsibleをインストール
-3-1. `yum -y update`  
-3-2. `sudo yum install -y epel-release`  
-3-3. `sudo yum install -y sshpass`  
-3-4. `sudo yum install -y python-devel`  
-3-5. `sudo yum install ansible`  
+## 3. Ansible実行
+3-1. `ansible-playbook playbook/site.yml`
 
-## 4. 一旦、プレイブックを実行
-4-1. `ansible-playbook playbook/site.yml -i hosts/local`  
-
-## 5. rolesの中身とモジュールの呼び出し
-5-1. `roles/{{module}}/tasks/main.yml`  
-5-2. 記法とか  
-5-3. できる事とか
-
-## 6. Wordpressインストール
-6-1. ansible-playbook playbook/wp.yml -i hosts/local
+## 4. Wordpressインストール
+4-1. ansible-playbook playbook/wp.yml
+4-2. hostsの設定
+4-3. handson.localを確認
