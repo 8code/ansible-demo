@@ -23,7 +23,7 @@ nginx:
   template_default: default.conf.j2
   template_vhost: fpm.conf.j2
   error_log: "{{ log_root }}/nginx/error_log"
-  access_log: "{{ log_root }}/nginx/access_log combined"
+  access_log: "{{ log_root }}/nginx/access_log"
 
 wp:
   sitename: handson
