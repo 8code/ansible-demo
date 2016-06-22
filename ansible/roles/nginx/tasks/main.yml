@@ -15,8 +15,8 @@
 
 - name: nginx - 設定をリロード
   #command: service nginx restart
-  #command: systemctl restart nginx
-  command: systemctl reload nginx
+  command: systemctl restart nginx
+  #command: systemctl reload nginx
 
 
 #- name: Set nginx.conf
