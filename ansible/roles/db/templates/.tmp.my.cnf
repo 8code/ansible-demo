@@ -1,0 +1,4 @@
+[client]
+user=root
+password={{ init_pwd.stdout }}
+connect-expired-password

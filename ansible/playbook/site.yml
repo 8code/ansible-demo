@@ -9,7 +9,7 @@
   roles:
     #- ../roles/common
     #- ../roles/httpd
-    - ../roles/nginx
-    - ../roles/php
-    - ../roles/mysql
+    #- ../roles/nginx
+    #- ../roles/php
+    - ../roles/db
     - ../roles/wp

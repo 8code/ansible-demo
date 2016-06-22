@@ -68,6 +68,7 @@
   template:
     src: wp-config.php
     dest: "{{ document_root }}/wp/wp-config-sample.php"
+  when: not is_wp_configured.stat.exists
   tags: [wp]
 
 - stat: path={{ document_root }}/index.php
@@ -99,6 +100,7 @@
 - name: 初期化用SQL削除
   command: rm {{ document_root }}/wp_init.sql
   ignore_errors: true
+  when: not is_wp_init.stat.exists
   tags: [wp]
 
 - name: index.phpを作成

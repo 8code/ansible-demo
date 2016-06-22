@@ -92,3 +92,5 @@ mv index.php www/html/
 ls
 ls www/html/
 exit
+sudo su
+exit

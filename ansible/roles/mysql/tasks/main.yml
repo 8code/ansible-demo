@@ -35,7 +35,7 @@
 
 - name: 初期パスワードを取得
   shell: |
-    sudo grep 'password is generated' /var/log/mysqld.log | awk -F'root@localhost: ' '{print $2}'
+    grep 'password is generated' /var/log/mysqld.log | awk -F'root@localhost: ' '{print $2}'
   register: tmp_pwd
   tags: mysql
 
@@ -47,20 +47,21 @@
   register: is_changed
   tags: mysql
 
-- name: rootのパスワードを変更
+- name: パスワードポリシーの変更
   shell: |
-    mysql -u root -p{{ tmp_pwd.stdout | quote }} --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql["root_password"] }}'"
+    mysql -u root -p{{ tmp_pwd.stdout }} -e "SET GLOBAL validate_password_policy=LOW; SET GLOBAL validate_password_length = 4"
   when: not is_changed.stat.exists
   tags: mysql
+
+#- name: rootのパスワードを変更
+#  shell: |
+#    mysql -u root -p{{ tmp_pwd.stdout }} --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql["root_password"] }}'"
+  #when: not is_changed.stat.exists
+#  tags: mysql
 
 - name: rootユーザーのmy.cnfを作成
   template: src=.my.cnf dest=/root/.my.cnf owner=root mode=0600
   when: not is_changed.stat.exists
-  tags: mysql
-
-- name: パスワードポリシーの変更
-  shell: |
-    mysql -u root -p{{ mysql["root_password"] | quote }} -e "SET GLOBAL validate_password_policy=LOW; SET GLOBAL validate_password_length = 4"
   tags: mysql
 
 - name: ユーザーを追加

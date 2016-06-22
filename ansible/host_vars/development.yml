@@ -36,4 +36,5 @@ wp:
 mysql:
   dbname: handson
   host: localhost
-  root_password: vagrant
+  root_password: G5vydB0F9Vw9
+  user_password: vagrant
