@@ -4,7 +4,6 @@
   yum: name=nginx state=latest
 
 - name: nginx - 自動起動設定
-  #command: chkconfig nginx on
   command: systemctl enable nginx
 
 - name: nginx - 環境設定（vhost）
@@ -14,16 +13,7 @@
   template: src={{ nginx['template_vhost'] }} dest={{ nginx['vhost_path'] }}/{{ nginx['vhost_file'] }}
 
 - name: nginx - 設定をリロード
-  #command: service nginx restart
   command: systemctl restart nginx
-  #command: systemctl reload nginx
-
-
-#- name: Set nginx.conf
-#  template: src={{ nginx['template'] }} dest=/etc/nginx/nginx.conf
-
-#- name: Set virtual.conf
-#  template: src={{ nginx['template'] }} dest={{ nginx['vhost_path'] }}/{{ nginx['vhost_file'] }}
 
 - name: Firewallにルールを追加
   command: firewall-cmd --add-service=http --permanent

@@ -32,15 +32,9 @@
   register: is_exists
 
 - name: パスワードポリシーの変更
-  #shell: |
-  #  mysql -u root -p{{ init_pwd.stdout | quote }} -e "SET GLOBAL validate_password_policy=LOW; SET GLOBAL validate_password_length = 4"
   shell: |
     mysql -u root -p{{ init_pwd.stdout }} --connect-expired-password -e "SET GLOBAL validate_password_policy=LOW; SET GLOBAL validate_password_length = 4"
   failed_when: is_exists.stat.md5 is defined
-
-#- name: rootユーザーのパスワードを再設定
-#  shell: |
-#    mysql -u root -p{{ init_pwd.stdout | quote }} --connect-expired-password -e "set password=password('{{ mysql["root_password"] }}');"
 
 - name: rootユーザーのパスワードを変更
   shell: |
