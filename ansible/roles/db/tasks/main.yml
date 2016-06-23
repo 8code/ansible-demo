@@ -29,15 +29,14 @@
 
 - name: 一時設定ファイルを設置
   template: src=.tmp.my.cnf dest=/root/.tmp.my.cnf owner=root mode=0600
-  register: is_changed
+  register: is_exists
 
 - name: パスワードポリシーの変更
   #shell: |
   #  mysql -u root -p{{ init_pwd.stdout | quote }} -e "SET GLOBAL validate_password_policy=LOW; SET GLOBAL validate_password_length = 4"
   shell: |
     mysql -u root -p{{ init_pwd.stdout }} --connect-expired-password -e "SET GLOBAL validate_password_policy=LOW; SET GLOBAL validate_password_length = 4"
-  fail: msg='err'
-  when: is_changed.stat.md5 err
+  failed_when: is_exists.stat.md5 is defined
 
 #- name: rootユーザーのパスワードを再設定
 #  shell: |
@@ -46,10 +45,11 @@
 - name: rootユーザーのパスワードを変更
   shell: |
     mysql --defaults-file=/root/.tmp.my.cnf -e "ALTER USER 'root'@'localhost' IDENTIFIED BY  '{{ mysql["root_password"] }}' "
+  failed_when: is_exists.stat.md5 is defined
 
 - name: rootユーザーのmy.cnfを作成
   template: src=.my.cnf dest=/root/.my.cnf owner=root mode=0600
-  # when: not is_changed.stat.exists
+  failed_when: is_exists.stat.md5 is defined
 
 - name: ユーザーを追加
   mysql_user:

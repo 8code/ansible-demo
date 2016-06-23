@@ -11,11 +11,15 @@
 ---
 
 ## 1. Vagrantで環境を作成
-1-1. `vagrant up`  
-1-2. `vagrant ssh`  
-1-3. `yum install ansible`
+
+:OS: CentOS 7.0 64 bit
+
+1-1. `$ vagrant up`  
+1-2. `$ vagrant ssh`  
+1-3. `$ yum install ansible`
 
 ## 2. Ansible解説＆LAMP環境を構築
+
 2-1. ディレクトリ構成、各種設定ファイルの解説  
 2-2. host_vars設定
 2-3. LAMP環境構築用のタスクを作成  
@@ -24,7 +28,8 @@
 2-6. PHP-FPM
 
 ## 3. Ansible実行
-3-1. `ansible-playbook playbook/site.yml`
+
+3-1. `$ ansible-playbook playbook/site.yml`
 
 ## 4. Wordpressインストール
 4-1. ansible-playbook playbook/wp.yml
