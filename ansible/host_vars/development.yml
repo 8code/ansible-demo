@@ -10,31 +10,3 @@ project_root: "/home/{{ user['name'] }}"
 document_root: "{{ project_root }}/www/html"
 log_root: /var/log
 charset: utf8
-
-static:
-  hostname: coding.handson.local
-  document_root: "{{ project_root }}/dist/www/html/cording"
-
-nginx:
-  server_name: 192.168.33.50
-  vhost_path: /etc/nginx/conf.d
-  default_file: default.conf
-  vhost_file: wordpress.conf
-  template_default: default.conf.j2
-  template_vhost: fpm.conf.j2
-  error_log: "{{ log_root }}/nginx/error_log"
-  access_log: "{{ log_root }}/nginx/access_log"
-
-wp:
-  sitename: handson
-  admin: dev
-  password: ^lS$9z)Y!uM&j0^Fa1qOl8iT
-  email: 'example@cinra.net'
-  theme: bootstrap
-  table_prefix: wp
-
-mysql:
-  dbname: handson
-  host: localhost
-  root_password: G5vydB0F9Vw9
-  user_password: vagrant
